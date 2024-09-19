@@ -3,7 +3,7 @@ from .models import Product , Rate
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display=["id","title","description","price","category","discount","average_rating"]
+    list_display=["id","title","description","price","category","discount","average_rating","Reviews"]
     search_fields=["title","price","category"]
     list_filter=["title","price","category"]
 class RateAdmin(admin.ModelAdmin):

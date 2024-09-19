@@ -4,7 +4,7 @@ from .models import Product, Rate
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id','title','description','category','price','discount','average_rating']
+        fields = ['id','title','description','category','price','discount','average_rating','Reviews']
 
     def validate(self, data):
         if data['price'] <= 20:

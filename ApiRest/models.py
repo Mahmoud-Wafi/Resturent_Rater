@@ -1,5 +1,6 @@
 from decimal import Decimal
-from django.db.models import Avg
+
+from django.db.models import Avg , Count
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -22,14 +23,16 @@ class Product(models.Model):
         return self.title
     @property
     def discount(self):
-        discount_rate = Decimal('0.4')  # Use Decimal for the discount rate
-        discount_amount = self.price * discount_rate  # Calculate 40% discount
-        discounted_price = self.price - discount_amount  # Final price after discount
+        discount_rate = Decimal('0.1')
+        discount_amount = self.price * discount_rate  
+        discounted_price = self.price - discount_amount 
         return round(discounted_price, 2)
     @property
     def average_rating(self):
-        return Rate.objects.filter(product=self).aggregate(Avg('stars'))['stars__avg'] or 0.0
-
+        return Rate.objects.filter(product=self).aggregate(Avg('stars'))#['stars__avg'] or 0.0
+    @property
+    def Reviews(self):
+        return Rate.objects.filter(product=self).count()
 
 
 class Rate(models.Model):
