@@ -29,7 +29,7 @@ class Product(models.Model):
         return round(discounted_price, 2)
     @property
     def average_rating(self):
-        return Rate.objects.filter(product=self).aggregate(Avg('stars'))#['stars__avg'] or 0.0
+        return Rate.objects.filter(product=self).aggregate(Avg('stars'))['stars__avg'] or 0.0
     @property
     def Reviews(self):
         return Rate.objects.filter(product=self).count()
